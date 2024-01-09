@@ -26,7 +26,7 @@ public class Author {
         this.authorName = authorName;
         this.email = email;
     }
-    private void addBook(Book book){
+    public void addBook(Book book){
         book.setAuthor(this);
         books.add(book);
     }
