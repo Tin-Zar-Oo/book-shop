@@ -8,12 +8,13 @@ import com.example.bookshop.entity.Author;
 import com.example.bookshop.entity.Book;
 import com.example.bookshop.entity.Genre;
 import com.example.bookshop.entity.Publisher;
-import com.example.bookshop.entity.util.IsbnGenerator;
+import com.example.bookshop.util.IsbnGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
@@ -25,6 +26,7 @@ public class BookShopApplication {
     private final PublisherDao publisherDao;
     @Bean
     @Transactional // to have same transaction
+    @Profile("data")
     public ApplicationRunner runner(){
         return r ->{
           Author author1 = new Author("Charles Dickens","charles123@gmail.com");
@@ -109,18 +111,9 @@ public class BookShopApplication {
             book5.addGenre(g2);
             book6.addGenre(g2);
 
-//            bookDao.save(book1);
-//            bookDao.save(book2);
-//            bookDao.save(book3);
-//            bookDao.save(book4);
-//            bookDao.save(book5);
-//            bookDao.save(book6);
-
             authorDao.save(author1);
             authorDao.save(author2);
 
-//            genreDao.save(genre1);
-//            genreDao.save(genre2);
 
         };
 

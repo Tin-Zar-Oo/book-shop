@@ -1,4 +1,4 @@
-package com.example.bookshop.entity.util;
+package com.example.bookshop.util;
 
 import java.util.Random;
 
