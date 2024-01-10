@@ -2,7 +2,26 @@
 <html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
 <body>
 <main role="main">
-<div class="container">Details</div>
+<div class="container-fluid bg-light">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 p-5">
+                <div class="card shadow rounded">
+                    <img th:src="${books.imgUrl}"  class="img-fluid" alt="">
+                </div>
+
+             </div>
+            <div class="col-md-6 p-5">
+                <h4 class="text-muted lead" th:text="${books.title}"></h4>
+                <p class="text-muted lead" th:text="${' by '+books.author.authorName}"></p>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ullam.</p>
+                <p class="lead">Price : <span th:text="${'$'+books.price}"></span></p>
+                <p class="lead">Publisher : <span th:text="${books.publisher.publisherName}"></span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
 </main>
 
 </body>
