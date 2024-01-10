@@ -6,7 +6,7 @@
     <div class="container-fluid bg-light">
         <div class="container p-5">
          <section class="mt-4">
-            <h3 class="text-center p-5"><i>BestSellers</i></h3>
+            <h3 class="text-center p-5"><i>Best Sellers</i></h3>
              <div class="row">
                  <div class="col">
                      <div class="card shadow" >
@@ -16,7 +16,7 @@
                          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, saepe?</p>
                          <div class="d-flex  justify-content-between">
                            <span th:text="${'$'+books.get(0).price}" class="lead text-muted"></span>
-                             <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                             <a th:href="@{/book/list-books}" class="btn btn-lg btn-outline-primary px-3 rounded">Details</a>
                          </div>
                      </div>
                  </div>
@@ -29,7 +29,7 @@
                              <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, saepe?</p>
                              <div class="d-flex  justify-content-between">
                                  <span th:text="${'$'+books.get(3).price}" class="lead text-muted"></span>
-                                 <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                                 <a th:href="@{/book/list-books}" class="btn btn-lg btn-outline-primary px-3 rounded">Details</a>
                              </div>
                          </div>
                      </div>

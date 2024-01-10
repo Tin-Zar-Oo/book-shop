@@ -40,13 +40,13 @@
 </div>
 </nav>
 
-<section id="showcase" class="d-flex justify-content-center align-items-center">
+<section id="showcase" class="d-flex justify-content-center align-items-center" style="color: #fa570c">
     <div id="overlay"></div>
     <div id="header" class="container text-center">
         <h3 class="display-5 m-0">MODERN BOOKSHOP</h3>
         <h1 class="display-1">BOOKSHOP</h1>
         <p class="lead d-none d-md-block">Lorem ipsum dolor sit amet,consectetur adiposicing elit.In,labore.</p>
-        <button class="btn btn-outline-primary px-5 py-2 text-white" id="book">Book Now!</button>
+        <a th:href="@{/book/list-books}" class="btn btn-outline-danger px-5 py-2 text-white" id="book">Book Now!</a>
     </div>
 </section>
 <div th:replace="${main}"></div>
@@ -58,7 +58,7 @@
                 <form action="#" >
                     <div class="input-group mb-3">
                         <input type="text" class="form-control">
-                        <button class="btn btn-success input-group-text">Search</button>
+                        <button class="input-group-text" style="background-color: #fa570c">Search</button>
                     </div>
                 </form>
             </div>
