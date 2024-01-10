@@ -52,7 +52,7 @@ public class BookShopApplication {
                             IsbnGenerator.generate(),
                             "Great Expectations",
                             "Good Choice",
-                            25.3,23,"https://source.unsplash.com/400x300/?nature");
+                            25.3,23,"https://source.unsplash.com/400x300/?book");
             Book book3 = new Book
                     (3,
                             IsbnGenerator.generate(),

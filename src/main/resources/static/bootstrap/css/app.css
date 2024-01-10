@@ -60,3 +60,6 @@ body {
 #quotes i {
     opacity: 0.3;
 }
+#footer .nav-link{
+ color: white !important;
+}
