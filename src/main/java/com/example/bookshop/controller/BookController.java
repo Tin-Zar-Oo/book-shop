@@ -3,11 +3,13 @@ package com.example.bookshop.controller;
 import com.example.bookshop.dao.BookDao;
 import com.example.bookshop.entity.BookId;
 import com.example.bookshop.service.BookService;
+import com.example.bookshop.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +22,7 @@ import java.util.Objects;
 public class BookController {
 
     private final BookService bookService;
+    private final CartService cartService;
 
 
     @GetMapping("/list-books") // -> /book/list-books
@@ -27,6 +30,12 @@ public class BookController {
         model.addAttribute("books",bookService.listBooks());
     return "listbooks";
     }
+
+    @ModelAttribute("cartSize")  // before do any controller
+    public Integer cartSize(){
+        return cartService.cartSize();
+    }
+
 
     @GetMapping("/book-details") // -> /book/book-details?id=1&isbn=ISBN-1234
     public String bookDetails(@RequestParam("id")Integer id,
@@ -44,5 +53,7 @@ public class BookController {
         model.addAttribute("books",bookService.findById(bookId));
         return "bookdetails";
     }
+
+
 
 }
