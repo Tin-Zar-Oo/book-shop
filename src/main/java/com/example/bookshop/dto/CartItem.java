@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -18,7 +20,11 @@ public class CartItem {
     private String isbn;
     private double price;
     private String title;
-    private int quantity;
+    private int quantity = 1;
+
+    private List<Integer> cartItemQuantity = new ArrayList<>();
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -31,5 +37,16 @@ public class CartItem {
     @Override
     public int hashCode() {
         return Objects.hash(id, isbn);
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", price=" + price +
+                ", title='" + title + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }
