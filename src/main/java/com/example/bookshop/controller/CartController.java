@@ -33,6 +33,12 @@ public class CartController {
         return "redirect:/cart/view-cart";
     }
 
+    @GetMapping("/clear-cart")
+    public String clearCart(){
+        cartService.clearCart();
+        return "redirect:/cart/view-cart";
+    }
+
     @GetMapping("/add-cart") // /cart/add-cart  -> no need to use model boz no need to show
     public String addToCart(@RequestParam("id") int id,
                             @RequestParam("isbn")String isbn,

@@ -5,11 +5,10 @@
 <main role="main">
     <div class="container-fluid bg-light">
         <div class="container mt-10">
-            <h3>Selected Items</h3>
-            <div class="row">
+                <div class="row">
                 <div class="col">
-                    <div class="card shadow">
-                    <table class="table table-striped my-4 p-5" th:if="${cartItems}">
+                    <div class="card shadow my-4 p-5">
+                    <table class="table table-striped" th:if="${!cartItems.isEmpty()}">
                         <thead>
                         <tr>
                             <th style="background-color: #fa570c">Id</th>
@@ -31,6 +30,14 @@
                          </tr>
                         </tbody>
                     </table>
+                        <div th:if="${cartItems.isEmpty()}">
+                          <h4 class="text-center text-muted">No Content</h4>
+                        </div>
+                        <div class="my-3">
+                            <a class="btn btn-outline-info me-2" th:if="${!cartItems.isEmpty()}">Checkout</a>
+                            <a th:href="@{/book/list-books}" class="btn btn-outline-secondary me-2" >Continue Shopping</a>
+                            <a th:href="@{/cart/clear-cart}" class="btn btn-outline-danger" th:if="${!cartItems.isEmpty()}">Clear Cart</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -40,4 +40,8 @@ public class CartService {
     public void deleteCartItem(int id, String isbn) {
         cartBean.deleteCartItem(id,isbn);
     }
+
+    public void clearCart() {
+        cartBean.clearCart();
+    }
 }
