@@ -3,6 +3,7 @@ package com.example.bookshop.service;
 import com.example.bookshop.dao.CustomerDao;
 import com.example.bookshop.dao.OrderDao;
 import com.example.bookshop.dao.RoleDao;
+import com.example.bookshop.dto.CustomerOrder;
 import com.example.bookshop.entity.Customer;
 import com.example.bookshop.entity.Order;
 import com.example.bookshop.entity.Role;
@@ -26,11 +27,15 @@ public class AuthService {
 
     @Transactional
     public void register(Customer customer,Order order){
-        Role role = roleDao.findRoleByRoleName("ROLE-USER").orElseThrow(EntityNotFoundException::new);
+        Role role = roleDao.findRoleByRoleName("ROLE_USER").orElseThrow(EntityNotFoundException::new);
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer.addRole(role);
         Order managedOrder = orderDao.save(order);
         customer.addOrder(managedOrder);
         customerDao.save(customer);
+    }
+
+    public CustomerOrder findCustomerInfoByCustomerName(String customerName) {
+        return customerDao.customerOrderInfo(customerName).orElseThrow(EntityNotFoundException::new);
     }
 }

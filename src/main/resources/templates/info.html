@@ -1,7 +1,72 @@
 <!DOCTYPE html>
-<html >
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
 
 <body>
-
+<main role="main">
+    <div class="container-fluid bg-light">
+    <div class="container">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6 p-3">
+                            <p class="lead">Customer Name:</p>
+                            <p class="lead">PhoneNumber:</p>
+                            <p class="lead">Email Address:</p>
+                            <p class="lead">Billing Address:</p>
+                            <p class="lead">Shipping Address:</p>
+                        </div>
+                        <div class="col-md-6 p-3">
+                            <p class="lead text-muted" th:text="${customerInfo.customerName}"></p>
+                            <p class="lead text-muted" th:text="${customerInfo.phone}"></p>
+                            <p class="lead text-muted" th:text="${customerInfo.email}"></p>
+                            <p class="lead text-muted" th:text="${customerInfo.billingAddress}"></p>
+                            <p class="lead text-muted" th:text="${customerInfo.shippingAddress}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-3">
+                            <p class="lead h4">Hello! <span th:text="${customerInfo.customerName}"></span>
+                            Your order cost $<span th:text="${totalPrice}"></span>&nbsp;Are you sure? You want to proceed
+                                <a th:href="@{/auth/login}" class="btn btn-primary">OK</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-4">
+                    <div class="row">
+                        <div class="co">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h3>Book Items</h3>
+                                </div>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>ISBN</th>
+                                        <th class="text-end">Price</th>
+                                        <th class="text-end">Quantity</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${cardItems}">
+                                        <td th:text="${item.id}"></td>
+                                        <td th:text="${item.title}"></td>
+                                        <td th:text="${item.isbn}"></td>
+                                        <td class="text-end" th:text="${'$'+item.price}"></td>
+                                        <td class="text-end" th:text="${item.quantity}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
 </body>
 </html>

@@ -6,13 +6,18 @@ import com.example.bookshop.entity.Order;
 import com.example.bookshop.entity.PaymentMethod;
 import com.example.bookshop.service.AuthService;
 import com.example.bookshop.service.CartService;
+import com.example.bookshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +26,8 @@ public class AuthController {
 
     private final AuthService authService;
     private final CartService cartService;
-    @GetMapping("/register")
+    private final CustomerService customerService;
+    @RequestMapping("/register")
     public String register(Model model){
         model.addAttribute("customer",new Customer());
         return "register";
@@ -43,27 +49,53 @@ public class AuthController {
         if(result.hasErrors()){
             return "register";
         }
+
         authService.register(customer,order);
-        return "redirect:/auth/info";
+        this.customer = customer;
+        return "redirect:/info";
     }
+
+    private Customer customer;
     @GetMapping("/info")
-    public String checkoutInfo(){
-        return "info";
+    public ModelAndView checkoutInfo(Map map, @ModelAttribute("totalPrice") double totalPrice){
+//      return new ModelAndView("info","cardItem",cartService.getCartItems());
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("cardItems",cartService.getCartItems());
+        mv.addObject("totalPrice",totalPrice);
+        mv.addObject("customerInfo",authService.findCustomerInfoByCustomerName(customer.getCustomerName()));
+        mv.setViewName("info");
+        return mv;
+
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model){
+        model.addAttribute("loginError",true);
+        return "login";
     }
 
     @GetMapping("/login")
     public String login(){
-        return "login";
+        if(Objects.isNull(customer)){
+            System.out.println("coming login....");
+            return "login";
+        }
+       else{
+            System.out.println("customer name:"+customer.getCustomerName());
+       customerService.saveCustomerOrderItems(customer);
+           return "login";
+        }
     }
 
     @ModelAttribute("totalPrice")
     public double totalAmount(){
-        return cartService
+        Optional<Double> optionalDouble = cartService
                 .getCartItems()
                 .stream()
                 .map( c -> c.getQuantity() * c.getPrice())
-                .reduce((a,b) -> a+b)
-                .get();
+                .reduce((a,b) -> a+b);
+        return optionalDouble.orElse(0.0);
+
     }
 
 

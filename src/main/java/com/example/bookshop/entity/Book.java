@@ -31,13 +31,14 @@ public class Book {
     @ManyToMany
     private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @ManyToOne
+    private OrderItem orderItem;
 
-    public void addOrderItem(OrderItem orderItem){
-        orderItem.setBook(this);
-        orderItems.add(orderItem);
-    }
+
+//    public void addOrderItem(OrderItem orderItem){
+//        orderItem.setBook(this);
+//        orderItems.add(orderItem);
+//    }
 
     public void addGenre(Genre genre){
         genre.getBooks().add(this);
