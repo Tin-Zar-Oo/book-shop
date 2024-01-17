@@ -19,42 +19,42 @@ public class BookShopApplication {
     private final GenreDao genreDao;
     private final PublisherDao publisherDao;
     private final RoleDao roleDao;
-
-
     @Bean @Transactional @Profile("security")
     public ApplicationRunner runner1(){
-        return  r -> {
-         Role admin = new Role();
-         admin.setRoleName("ROLE-ADMIN");
-         Role user = new Role();
-         user.setRoleName("ROLE_USER");
-         roleDao.save(admin);
-         roleDao.save(user);
+        return r ->{
+            Role admin=new Role();
+            admin.setRoleName("ROLE_ADMIN");
+
+            Role user=new Role();
+            user.setRoleName("ROLE_USER");
+
+            roleDao.save(admin);
+            roleDao.save(user);
         };
     }
-    @Bean
-    @Transactional // to have same transaction
-    @Profile("data")
+    @Bean @Transactional @Profile("data")
     public ApplicationRunner runner(){
-        return r ->{
-          Author author1 = new Author("Charles Dickens","charles123@gmail.com");
-          Author author2 = new Author("Thomas Hardy","thomashardy@gmail.com");
+        return  r ->{
+            Author author1=
+                    new Author("Charles Dickens","charles@gmail.com");
+            Author author2=
+                    new Author("Thomas Hardy","hardy@gmail.com");
 
-          Publisher publisher1 = new Publisher("New Era","newera@gmail.com");
-          Publisher publisher2 = new Publisher("Sun","sun123@gmail.com");
+            Publisher publisher1=new Publisher("New Era","newera@gmail.com");
+            Publisher publisher2=new Publisher("Sun","sun@gmail.com");
 
-          Genre genre1 = new Genre();
-          genre1.setGenreName("Tragedy");
-          Genre genre2 = new Genre();
-          genre2.setGenreName("Adventure");
+            Genre genre1=new Genre();
+            genre1.setGenreName("Tragedy");
 
-          Book book1 = new Book
-                  (1,
-                          IsbnGenerator.generate(),
-                          "Oliver Twist",
-                          "Excellent",
-                          50.3,20,
-                          "https://source.unsplash.com/400x300/?flower");
+            Genre genre2=new Genre();
+            genre2.setGenreName("Adventure");
+            Book book1 = new Book
+                    (1,
+                            IsbnGenerator.generate(),
+                            "Oliver Twist",
+                            "Excellent",
+                            50.3,20,
+                            "https://source.unsplash.com/400x300/?flower");
             Book book2 = new Book
                     (2,
                             IsbnGenerator.generate(),
@@ -94,39 +94,40 @@ public class BookShopApplication {
             author2.addBook(book5);
             author2.addBook(book6);
 
-            Publisher pub1 = publisherDao.save(publisher1);
+
+            Publisher pub1=publisherDao.save(publisher1);
 
             pub1.addBook(book1);
             pub1.addBook(book2);
             pub1.addBook(book3);
 
-            Publisher pub2 = publisherDao.save(publisher2);
+            Publisher pub2=publisherDao.save(publisher2);
 
             pub2.addBook(book4);
             pub2.addBook(book5);
             pub2.addBook(book6);
 
-            Genre g1 =genreDao.save(genre1);
-            Genre g2 =genreDao.save(genre2);
+            Genre gen1=genreDao.save(genre1);
+            Genre gen2=genreDao.save(genre2);
 
+            book1.addGenres(gen1);
+            book2.addGenres(gen1);
+            book3.addGenres(gen1);
 
+            book4.addGenres(gen2);
+            book5.addGenres(gen2);
+            book6.addGenres(gen2);
 
-            book1.addGenre(g1);
-            book2.addGenre(g1);
-            book3.addGenre(g1);
-
-            book4.addGenre(g2);
-            book5.addGenre(g2);
-            book6.addGenre(g2);
 
             authorDao.save(author1);
             authorDao.save(author2);
 
 
+
+
         };
-
-
     }
+
 
     public static void main(String[] args) {
         SpringApplication.run(BookShopApplication.class, args);

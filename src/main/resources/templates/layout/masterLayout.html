@@ -43,10 +43,10 @@ xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
         </div>
         <div sec:authorize="isAuthenticated()">
-            <a href="#" class="me-2">Own Library</a>
-            <a href="javascript: document.logoutForm.submit()">Logout</a>
-
-            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <a th:href="@{/book/own-library}"  class="nav-link me-2">Own Library</a>
+            <a href="javascript: document.logoutForm.submit()" class="nav-link">Logout</a>
+            <form name="logoutForm" th:action="@{/logout}"
+                  method="post" th:hidden="true">
                 <input type="submit" hidden value="Logout">
             </form>
 

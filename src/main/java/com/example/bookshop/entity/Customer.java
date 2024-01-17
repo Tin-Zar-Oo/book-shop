@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 public class Customer {
     @Id
@@ -25,12 +24,12 @@ public class Customer {
     private String email;
     private String address;
     private String phoneNumber;
-
     @OneToMany(mappedBy = "customer")
-    private List<Order> orders = new ArrayList<>();
-
+    private List<Order> orders=
+            new ArrayList<>();
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles=
+            new HashSet<>();
 
     public void addRole(Role role){
         role.getCustomers().add(this);
@@ -47,5 +46,17 @@ public class Customer {
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", customerName='" + customerName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

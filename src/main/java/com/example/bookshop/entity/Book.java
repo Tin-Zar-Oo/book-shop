@@ -8,11 +8,11 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@Entity
 @IdClass(BookId.class)
+@NoArgsConstructor
 public class Book {
     @Id
     private int id;
@@ -23,27 +23,20 @@ public class Book {
     private double price;
     private int stock;
     private String imgUrl;
-
     @ManyToOne
     private Author author;
     @ManyToOne
     private Publisher publisher;
     @ManyToMany
-    private List<Genre> genres = new ArrayList<>();
-
-    @ManyToOne
-    private OrderItem orderItem;
+    private List<Genre>  genres=
+            new ArrayList<>();
 
 
-//    public void addOrderItem(OrderItem orderItem){
-//        orderItem.setBook(this);
-//        orderItems.add(orderItem);
-//    }
 
-    public void addGenre(Genre genre){
+
+    public void addGenres(Genre genre){
         genre.getBooks().add(this);
         genres.add(genre);
-
     }
 
     public Book(int id, String isbn, String title, String description, double price, int stock,String imgUrl) {

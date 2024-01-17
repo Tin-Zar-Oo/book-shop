@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name="customer_order")
+@Table(name = "customer_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,12 @@ public class Order {
     private PaymentMethod paymentMethod;
     private double totalAmount;
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems=
+            new ArrayList<>();
     @ManyToOne
     private Customer customer;
 
-    public void addOrderItem(OrderItem orderItem){
+    public void add(OrderItem orderItem){
         orderItem.setOrder(this);
         orderItems.add(orderItem);
     }
@@ -44,4 +45,3 @@ public class Order {
         this.totalAmount = totalAmount;
     }
 }
-

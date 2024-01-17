@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,18 +14,15 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartItem {
+public class CartItem implements Serializable {
 
     private int id;
     private String isbn;
-    private double price;
     private String title;
-    private int quantity = 1;
-
-    private List<Integer> cartItemQuantity = new ArrayList<>();
-
-
-
+    private double price;
+    private int quantity=1;
+    private List<Integer> cartItemQuantity=
+            new ArrayList<>();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,8 +41,8 @@ public class CartItem {
         return "CartItem{" +
                 "id=" + id +
                 ", isbn='" + isbn + '\'' +
-                ", price=" + price +
                 ", title='" + title + '\'' +
+                ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
     }

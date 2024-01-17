@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 @Component
 @SessionScope
 public class CartBean {
-
-    private Set<CartItem> cartItems = new HashSet<>();  // quick performance and not accept duplicate
+    private Set<CartItem> cartItems=
+            new HashSet<>();
 
     public void addCartItem(CartItem cartItem){
+        System.out.println("Cart Item::::=================="+ cartItem);
         cartItems.add(cartItem);
     }
 
@@ -30,8 +31,8 @@ public class CartBean {
 
 
     public void deleteCartItem(int id, String isbn) {
-       this.cartItems  = this.cartItems.stream().filter(
-                c -> c.getId() != id &&  !c.getIsbn().equals(isbn))
+        this.cartItems=this.cartItems.stream()
+                .filter( c -> c.getId() !=id && !c.getIsbn().equals(isbn))
                 .collect(Collectors.toSet());
     }
 

@@ -12,31 +12,28 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    // come from entity -> card item -> cart
-
     private final CartBean cartBean;
 
-    public Set<CartItem> getCartItems(){
-    return cartBean.getCartItems();
-    }
-    //to count item -> 1,2,3
     public void addToCart(Book book){
-    cartBean.addCartItem(toCartItem(book));
+        cartBean.addCartItem(toCartItem(book));
+    }
+
+    public Set<CartItem> getCartItems(){
+        return cartBean.getCartItems();
     }
 
     public Integer cartSize(){
-       return cartBean.cartSize();
+        return cartBean.cartSize();
     }
 
-    // adding book to cart item
-    public CartItem toCartItem(Book book){
-        List<Integer> list = new ArrayList<>();
+    private CartItem toCartItem(Book book){
+        List<Integer> list=new ArrayList<>();
         list.add(1);
         return new CartItem(
                 book.getId(),
                 book.getIsbn(),
-                book.getPrice(),
                 book.getTitle(),
+                book.getPrice(),
                 1,
                 list
         );
